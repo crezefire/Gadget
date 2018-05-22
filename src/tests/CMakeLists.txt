@@ -1,18 +1,18 @@
-project(tests
+project(gadget-tests
     VERSION 0.0
     LANGUAGES CXX
 )
 
-add_executable(tests
+add_executable(gadget-tests
     ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
 )
 
-add_executable(gget::tests
+add_executable(gget::gadget-tests
     ALIAS
-        tests
+        gadget-tests
 )
 
-target_link_libraries(tests
+target_link_libraries(gadget-tests
     INTERFACE
         gget::compile-options-private
     PRIVATE
