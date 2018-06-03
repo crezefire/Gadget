@@ -5,7 +5,7 @@ project(gadget
 
 add_library(gadget
     STATIC
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/engine.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/gadget.cpp
 )
 
 add_library(gget::gadget

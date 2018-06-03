@@ -4,7 +4,7 @@ project(gadget-tests
 )
 
 add_executable(gadget-tests
-    ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/error.cpp
 )
 
 add_executable(gget::gadget-tests
@@ -17,4 +17,5 @@ target_link_libraries(gadget-tests
         gget::compile-options-private
     PRIVATE
         gget::ext_google_test
+        gget::gadget
 )
