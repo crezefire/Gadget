@@ -29,16 +29,16 @@ install(
     TARGETS
         gadget-compile-options-public
     EXPORT
-        CompileOptionsPublicTargets
+        GadgetCompileOptionsPublicTargets
 )
 
 install(
     EXPORT
-        CompileOptionsPublicTargets
+        GadgetCompileOptionsPublicTargets
     FILE
-        CompileOptionsPublicTargets.cmake
+        GadgetCompileOptionsPublicTargets.cmake
     NAMESPACE
         gget::
     DESTINATION
-        lib/cmake/CompileOptionsPublicTargets
+        lib/cmake/GadgetCompileOptionsPublicTargets
 )

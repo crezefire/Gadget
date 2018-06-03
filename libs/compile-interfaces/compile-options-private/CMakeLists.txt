@@ -55,16 +55,16 @@ install(
     TARGETS
         gadget-compile-options-private
     EXPORT
-        CompileOptionsPrivateTargets
+        GadgetCompileOptionsPrivateTargets
 )
 
 install(
     EXPORT
-        CompileOptionsPrivateTargets
+        GadgetCompileOptionsPrivateTargets
     FILE
-        CompileOptionsPrivateTargets.cmake
+        GadgetCompileOptionsPrivateTargets.cmake
     NAMESPACE
         gget::
     DESTINATION
-        lib/cmake/CompileOptionsPrivateTargets
+        lib/cmake/GadgetCompileOptionsPrivateTargets
 )
