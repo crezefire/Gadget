@@ -30,6 +30,9 @@ class Error {
   Error(const Error&) = delete;
 
   Error(Error&& rhs)
+#ifdef NDEBUG
+      = default;
+#else
       : Handled(rhs.Handled)
       , Message(rhs.Message)
       , Code(rhs.Code)
@@ -39,6 +42,7 @@ class Error {
   }
 
   ~Error() { assert(Handled); }
+#endif
 
   operator bool() const {
     assert((Handled = true));
