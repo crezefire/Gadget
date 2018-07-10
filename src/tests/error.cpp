@@ -3,7 +3,7 @@
 
 using namespace gget;
 
-TEST(GadgetError, NoCheckDeath) { ASSERT_DEATH(Error err(Error::NoError), ""); }
+TEST(GadgetError, NoCheckDeath) { ASSERT_DEBUG_DEATH(Error err(Error::NoError), ""); }
 
 TEST(GadgetError, CheckNoDeath) {
   ASSERT_NO_FATAL_FAILURE({
