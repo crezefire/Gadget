@@ -1,4 +1,4 @@
-# Gadget
+# Gadgets
 
 A library for common utilities.
 
