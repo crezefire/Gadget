@@ -5,7 +5,6 @@ project(gadget-tests
 
 add_executable(gadget-tests
     ${CMAKE_CURRENT_SOURCE_DIR}/error.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/optional-error.cpp
 )
 
 add_executable(gget::gadget-tests
