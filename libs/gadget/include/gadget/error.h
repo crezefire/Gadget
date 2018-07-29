@@ -3,19 +3,22 @@
 #include <cassert>
 
 namespace gget {
-
 class Error {
     [[maybe_unused]] mutable bool Handled{false};
     char const* Message{nullptr};
     const int Code{-1};
 
+    // TODO: Do I need these?
+    // If yes, how do I handle propogation
     int Line{-1};
     char const* FileName{nullptr};
 
-    public:
+public:
     enum NE { NoError = 0 };
 
     static constexpr int HasError = 1;
+
+    Error() = default;
 
     Error(NE)
         : Error(0) {}
@@ -67,5 +70,4 @@ class Error {
     int GetCode() const { return Code; }
     int GetLine() const { return Line; }
 };
-
 } // namespace gget
