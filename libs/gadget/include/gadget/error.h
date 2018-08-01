@@ -3,7 +3,7 @@
 #include <cassert>
 
 namespace gget {
-class Error {
+class [[nodiscard]] Error {
     [[maybe_unused]] mutable bool Handled{false};
     char const* Message{nullptr};
     const int Code{-1};
@@ -40,7 +40,7 @@ public:
 
     Error(const Error&) = delete;
 
-    Error(Error&& rhs)
+    Error(Error && rhs)
 #ifdef NDEBUG
         = default;
 #else
@@ -69,5 +69,11 @@ public:
     char const* GetFileName() const { return FileName; }
     int GetCode() const { return Code; }
     int GetLine() const { return Line; }
+};
+
+template <typename T>
+struct ErrorValue {
+    Error E;
+    T Value;
 };
 } // namespace gget
