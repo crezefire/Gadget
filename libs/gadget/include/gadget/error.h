@@ -14,14 +14,12 @@ class [[nodiscard]] Error {
     char const* FileName{nullptr};
 
 public:
-    enum NE { NoError = 0 };
-
-    static constexpr int HasError = 1;
+    enum DefaultErrorCodes { NoError = 0, HasError = 1 };
 
     Error() = default;
 
-    Error(NE)
-        : Error(0) {}
+    Error(DefaultErrorCodes errorCode)
+        : Error(static_cast<int>(errorCode)) {}
 
     Error(int errorCode, char const* message, int const line, char const* fileName)
         : Message(message)
