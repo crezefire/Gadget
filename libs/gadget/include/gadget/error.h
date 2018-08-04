@@ -5,48 +5,33 @@
 namespace gget {
 class [[nodiscard]] Error {
     [[maybe_unused]] mutable bool Handled{false};
-    char const* Message{nullptr};
-    const int Code{-1};
-
-    // TODO: Do I need these?
-    // If yes, how do I handle propogation
-    int Line{-1};
-    char const* FileName{nullptr};
+    char const*                   Message{nullptr};
+    const int                     Code{-1};
 
 public:
-    enum DefaultErrorCodes { NoError = 0, HasError = 1 };
+    enum DefaultErrorCodes
+    {
+        NoError  = 0,
+        HasError = 1
+    };
 
     Error() = default;
 
-    Error(DefaultErrorCodes errorCode)
-        : Error(static_cast<int>(errorCode)) {}
+    Error(DefaultErrorCodes errorCode) : Error(static_cast<int>(errorCode)) {}
 
-    Error(int errorCode, char const* message, int const line, char const* fileName)
-        : Message(message)
-        , Code(errorCode)
-        , Line(line)
-        , FileName(fileName) {}
+    Error(int errorCode, char const* message) : Message(message), Code(errorCode) {}
 
-    Error(int const errorCode)
-        : Error(errorCode, nullptr, 0, nullptr) {}
+    Error(int const errorCode) : Error(errorCode, nullptr) {}
 
-    Error(int const errorCode, char const* message)
-        : Error(errorCode, message, 0, nullptr) {}
-
-    Error(char const* message)
-        : Error(HasError, message, 0, nullptr) {}
+    Error(char const* message) : Error(HasError, message) {}
 
     Error(const Error&) = delete;
 
     Error(Error && rhs)
 #ifdef NDEBUG
-        = default;
+      = default;
 #else
-        : Handled(rhs.Handled)
-        , Message(rhs.Message)
-        , Code(rhs.Code)
-        , Line(rhs.Line)
-        , FileName(rhs.FileName) {
+        : Handled(rhs.Handled), Message(rhs.Message), Code(rhs.Code) {
         assert((rhs.Handled = true));
     }
 
@@ -64,14 +49,17 @@ public:
     }
 
     char const* GetMessage() const { return Message; }
-    char const* GetFileName() const { return FileName; }
-    int GetCode() const { return Code; }
-    int GetLine() const { return Line; }
+    int         GetCode() const { return Code; }
 };
 
 template <typename T>
 struct ErrorValue {
     Error E;
-    T Value;
+    T     Value;
 };
 } // namespace gget
+
+#define __GADGET_STRINGIFY_IMPL(str) #str
+#define __GADGET_STRINGIFY(str) __GADGET_STRINGIFY_IMPL(str)
+#define __GADGET_ERMSG(msg, file, line) file "(" line "): " msg
+#define GADGET_ERMSG(msg) __GADGET_ERMSG(msg, __FILE__, __GADGET_STRINGIFY(__LINE__))
