@@ -4,9 +4,12 @@
 
 namespace gget {
 class [[nodiscard]] Error {
-    [[maybe_unused]] mutable bool Handled{false};
-    char const*                   Message{nullptr};
-    const int                     Code{-1};
+#ifndef NDEBUG
+    mutable bool Handled{false};
+#endif
+
+    char const* Message{nullptr};
+    int         Code{-1};
 
 public:
     enum DefaultErrorCodes
@@ -25,7 +28,7 @@ public:
 
     Error(char const* message) : Error(HasError, message) {}
 
-    Error(const Error&) = delete;
+    Error(Error const&) = delete;
 
     Error(Error && rhs)
 #ifdef NDEBUG
